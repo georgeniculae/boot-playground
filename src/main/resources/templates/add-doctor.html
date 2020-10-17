@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form input th:action="@{/doctor/add}" th:object="${doctor}" method="post">
+    <div>
+        <div>
+            <input type="text" th:field="${doctor.firstName}" id="firstName" placeholder="First name">
+        </div>
+
+        <div>
+            <input type="text" th:field="${doctor.lastName}" id="lastName" placeholder="Last name">
+        </div>
+
+        <div>
+            <input type="email" th:field="${doctor.email}" id="email" placeholder="Email">
+        </div>
+    </div>
+
+    <div>
+        <input type="submit" value="Add doctor">
+    </div>
+
+</form>
+
+</body>
+</html>

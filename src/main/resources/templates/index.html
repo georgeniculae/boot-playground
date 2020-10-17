@@ -6,7 +6,14 @@
 </head>
 <body>
 <h2>Doctors</h2>
-<table>
+
+<a th:href="@{/signup}">Sign up</a>
+
+<div th:if="${doctors.size() == 0}">
+    <h2>No doctors in application</h2>
+</div>
+
+<table th:if="${doctors.size() > 0}">
     <thead>
     <th>First name</th>
     <th>Last name</th>
@@ -18,10 +25,12 @@
         <td th:text="${doctor.firstName}"></td>
         <td th:text="${doctor.lastName}"></td>
         <td th:text="${doctor.email}"></td>
-        <td><a th:href="@{/doctor/delete/{id}(id = ${doctor.id})}" th:text="'Delete doctor with id ' + ${doctor.id}"></a></td>
-    <!-- "@link"/{variabila}{variabile} = ${doctor.id}})} -->
+        <td><a th:href="@{/doctor/delete/{id}(id = ${doctor.id})}"
+               th:text="'Delete doctor with id ' + ${doctor.id}"></a></td>
+        <!-- "@link"/{variabila}{variabile} = ${doctor.id}})} -->
     </tr>
     </tbody>
+
 </table>
 </body>
 </html>
