@@ -11,12 +11,15 @@
     <th>First name</th>
     <th>Last name</th>
     <th>Email</th>
+    <th>Delete</th>
     </thead>
     <tbody>
     <tr th:each="doctor : ${doctors}">
         <td th:text="${doctor.firstName}"></td>
         <td th:text="${doctor.lastName}"></td>
         <td th:text="${doctor.email}"></td>
+        <td><a th:href="@{/doctor/delete/{id}(id = ${doctor.id})}" th:text="'Delete doctor with id ' + ${doctor.id}"></a></td>
+    <!-- "@link"/{variabila}{variabile} = ${doctor.id}})} -->
     </tr>
     </tbody>
 </table>
