@@ -61,6 +61,10 @@ public class DoctorService {
         doctorRepository.deleteById(id);
     }
 
+    public List<Doctor> findAllDoctors() {
+        return doctorRepository.findAll();
+    }
+
     public Doctor findDoctorById(Long id) {
         Optional<Doctor> optionalDoctor = doctorRepository.findByIdFull(id);
         if (optionalDoctor.isPresent()) {
