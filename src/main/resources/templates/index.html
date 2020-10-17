@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Home page</title>
+    <style>
+        .my-table-header{
+            color: dimgray;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css.MyStyles.css}"/>
+
+
 </head>
 <body>
 <h2>Doctors</h2>
@@ -14,7 +23,7 @@
 </div>
 
 <table th:if="${doctors.size() > 0}">
-    <thead>
+    <thead class="my-table-header">
     <th>First name</th>
     <th>Last name</th>
     <th>Email</th>
