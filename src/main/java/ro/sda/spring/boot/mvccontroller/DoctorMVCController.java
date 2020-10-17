@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ro.sda.spring.boot.entity.Doctor;
 import ro.sda.spring.boot.service.DoctorService;
 
-import javax.naming.Binding;
+import javax.validation.Valid;
 
 @Controller
 public class DoctorMVCController {
@@ -45,7 +45,25 @@ public class DoctorMVCController {
     }
 
     @PostMapping(path = "/doctor/add")
-    public String addDoctor(@ModelAttribute("doctor") Doctor doctor, BindingResult result, Model model) {
+    public String addDoctor(@ModelAttribute("doctor") @Valid Doctor doctor, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "add-doctor";
+        }
+        this.doctorService.saveDoctor(doctor);
+        return "redirect:/";
+    }
+
+    @GetMapping(path = "/doctor/edit/{id}")
+    public String showEditPage(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("doctor", this.doctorService.findDoctorById(id));
+        return "edit-doctor";
+    }
+
+    @PostMapping(path = "/doctor/update")
+    public String editDoctor(@ModelAttribute("doctor") @Valid Doctor doctor, BindingResult result) {
+        if (result.hasErrors()) {
+            return "edit-doctor";
+        }
         this.doctorService.saveDoctor(doctor);
         return "redirect:/";
     }

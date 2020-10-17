@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add doctor</title>
+    <title>Edit doctor</title>
 </head>
 <body>
 
@@ -10,7 +10,8 @@
     <a href="/">Go home</a>
 </div>
 
-<form th:action="@{/doctor/add}" th:object="${doctor}" method="post">
+<form th:action="@{/doctor/update}" th:object="${doctor}" method="post">
+    <input hidden th:field="${doctor.id}">
     <div>
         <div>
             <label for="firstName">First name</label>
@@ -32,7 +33,7 @@
     </div>
 
     <div>
-        <input type="submit" value="Add doctor">
+        <input type="submit" value="Edit doctor">
     </div>
 
 </form>
