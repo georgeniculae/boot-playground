@@ -1,4 +1,4 @@
-package ro.sda.spring.boot.controller;
+package ro.sda.spring.boot.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
