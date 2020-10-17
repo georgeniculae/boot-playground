@@ -54,7 +54,7 @@ public class DoctorController {
         Doctor savedDoctor = doctorService.saveDoctor(doctor);
         //transform from entity DTO
         DoctorDTO savedDoctorDTO = doctorTransformer.transformReversed(savedDoctor);
-        //put doctor Dto into response entity
+        //put doctor DTO into response entity
         return ResponseEntity.ok(savedDoctorDTO);
     }
 

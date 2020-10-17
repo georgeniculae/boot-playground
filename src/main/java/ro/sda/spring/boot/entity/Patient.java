@@ -9,6 +9,7 @@ import java.util.Objects;
 
 @Entity
 public class Patient extends BaseEntity {
+
     @Column(nullable = false, length = 32)
     private String firstName;
 
