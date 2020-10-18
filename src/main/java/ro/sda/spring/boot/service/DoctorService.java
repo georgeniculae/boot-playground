@@ -41,15 +41,16 @@ public class DoctorService {
 //        System.out.println(this.doctorRepository.countDoctorsByLastName("Juncu"));
     }
 
-    public List<Doctor> createDefaultDoctors() {
+    public void createDefaultDoctors() {
         List<Doctor> doctors = new ArrayList<>();
-        doctors.add(new Doctor("Adrian", "Bobocel", "str. Carpenului", 12l, "500421", "a.bobocel@gmail.com"));
-        doctors.add(new Doctor("Adrian", "Rotila", "str. Socului", 45l, "500435", "a.rotila@yahoo.com"));
-        doctors.add(new Doctor("Bogdan", "Gabor", "str. Nucului", 5l, "589234", "b.gabor@gmail.com"));
-        doctors.add(new Doctor("Constantin", "Juncu", "str. Ciresului", 37l, "457890", "c.juncu@yahoo.com"));
-        doctors.add(new Doctor("George", "Niculae", "str. Aviatorilor", 1l, "400193", "george.niculae@yahoo.com"));
-        doctorRepository.saveAll(doctors);
-        return doctors;
+        if (this.doctorRepository.count() == 0) {
+            doctors.add(new Doctor("Adrian", "Bobocel", "str. Carpenului", 12l, "500421", "a.bobocel@gmail.com"));
+            doctors.add(new Doctor("Adrian", "Rotila", "str. Socului", 45l, "500435", "a.rotila@yahoo.com"));
+            doctors.add(new Doctor("Bogdan", "Gabor", "str. Nucului", 5l, "589234", "b.gabor@gmail.com"));
+            doctors.add(new Doctor("Constantin", "Juncu", "str. Ciresului", 37l, "457890", "c.juncu@yahoo.com"));
+            doctors.add(new Doctor("George", "Niculae", "str. Aviatorilor", 1l, "400193", "g.niculae@yahoo.com"));
+            doctorRepository.saveAll(doctors);
+        }
     }
 
     public Doctor saveDoctor(Doctor doctor) {

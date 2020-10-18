@@ -1,6 +1,10 @@
 package ro.sda.spring.boot.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,27 +15,34 @@ import java.util.Objects;
 public class Patient extends BaseEntity {
 
     @Column(nullable = false, length = 32)
+    @NotBlank(message = "First name cannot be blank.")
     private String firstName;
 
     @Column(nullable = false, length = 32)
+    @NotBlank(message = "Last name cannot be blank.")
     private String lastName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
+    @NotNull(message = "Date of birth cannot be blank.")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 128)
+    @NotBlank(message = "Height cannot be blank.")
     private String street;
 
-    @Column(nullable = false, length = 32)
+    @Column(nullable = true, length = 32)
     private Long streetNo;
 
-    @Column(nullable = false, length = 32)
+    @Column(nullable = true, length = 32)
     private String postalCode;
 
-    @Column(nullable = false)
+    @Column(nullable = true, length = 32)
+    //@NotBlank(message = "Height cannot be blank.")
     private Long height;
 
-    @Column(nullable = false)
+    @Column(nullable = true, length = 32)
+    //@NotBlank(message = "Weight cannot be blank.")
     private BigDecimal weight;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

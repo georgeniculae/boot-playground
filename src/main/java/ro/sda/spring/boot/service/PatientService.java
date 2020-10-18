@@ -28,6 +28,7 @@ public class PatientService {
     @PostConstruct
     public void init() {
         this.initializePatients();
+        this.findAllPatients();
 //        this.findPatientById(1l);
 //        this.patientsBornAfter(LocalDate.of(1990, 9, 9));
 //        this.findPatientsByDateOfBirthBefore(LocalDate.of(1989, 1, 1));
@@ -54,6 +55,12 @@ public class PatientService {
     public void deletePatientById(Long id) {
         this.findPatientById(id);
         patientRepository.deleteById(id);
+    }
+
+    public List<Patient> findAllPatients() {
+        List<Patient> patients = patientRepository.findAll();
+        System.out.println(patients);
+        return patients;
     }
 
     public Patient findPatientById(Long id) {

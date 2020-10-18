@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title>Home page</title>
     <style>
-        .my-table-header{
+        .my-table-header {
             color: dimgray;
         }
     </style>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css.MyStyles.css}"/>
-
+    <link rel="stylesheet" type="text/css" th:href="@{/css/MyStyles.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 
 </head>
 <body>
 <h2>Doctors</h2>
 
-<a th:href="@{/signup}">Sign up</a>
+<a href="/logout">Log out</a>
+
+<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/signup}">Add doctor</a>
 
 <div th:if="${doctors.size() == 0}">
     <h2>No doctors in application</h2>
@@ -27,20 +31,45 @@
     <th>First name</th>
     <th>Last name</th>
     <th>Email</th>
-    <th>Edit</th>
-    <th>Delete</th>
+    <th sec:authorize="hasRole('ROLE_ADMIN')">Edit</th>
+    <th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
     </thead>
     <tbody>
     <tr th:each="doctor : ${doctors}">
         <td th:text="${doctor.firstName}"></td>
         <td th:text="${doctor.lastName}"></td>
         <td th:text="${doctor.email}"></td>
-        <td><a th:href="@{/doctor/edit/{id}(id = ${doctor.id})}" th:text="'Edit doctor with id ' + ${doctor.id}"></a></td>
-        <td><a th:href="@{/doctor/delete/{id}(id = ${doctor.id})}" th:text="'Delete doctor with id ' + ${doctor.id}"></a></td>
+        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/doctor/edit/{id}(id = ${doctor.id})}"
+                                                     th:text="'Edit doctor with id ' + ${doctor.id}"></a>
+        </td>
+        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/doctor/delete/{id}(id = ${doctor.id})}"
+                                                     th:text="'Delete doctor with id ' + ${doctor.id}"></a></td>
         <!-- "@link"/{variabila}{variabile} = ${doctor.id}})} -->
     </tr>
     </tbody>
 
 </table>
+
+<h2>Patients</h2>
+
+<table>
+    <thead>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Date of birth</th>
+    <!--    <th>Weight</th>-->
+    <!--    <th>Street</th>-->
+    </thead>
+    <tbody>
+    <tr th:each="patient : ${patients}">
+        <td th:text="${patient.firstName}"></td>
+        <td th:text="${patient.lastName}"></td>
+        <td th:text="${patient.dateOfBirth}"></td>
+        <!--        <td th:text="${patient.weight}"></td>-->
+        <!--        <td th:text="${patient.street}"></td>-->
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
