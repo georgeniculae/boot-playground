@@ -24,7 +24,7 @@
     <th>First name</th>
     <th>Last name</th>
     <th>Email</th>
-    <th sec:authorize="hasRole('ROLE_ADMIN')">Edit</th>
+    <th sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_SUPPORT')">Edit</th>
     <th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
     </thead>
     <tbody>
@@ -32,7 +32,7 @@
         <td th:text="${doctor.firstName}"></td>
         <td th:text="${doctor.lastName}"></td>
         <td th:text="${doctor.email}"></td>
-        <td sec:authorize="hasRole('ROLE_ADMIN')">
+        <td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_SUPPORT')">
             <a class="btn btn-primary" th:href="@{/doctor/edit/{id}(id = ${doctor.id})}">
                 <i class="fas fa-user-edit"></i>
             </a>
@@ -48,11 +48,11 @@
 
 <h2>Patients</h2>
 
-<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success" style="margin: 15px" th:href="@{/signup/patient}">Add
+<a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_SUPPORT')" class="btn btn-success" style="margin: 15px" th:href="@{/signup/patient}">Add
     patient</a>
 
 <div th:if="${patients.size() == 0}">
-    <h2>No doctors in application.</h2>
+    <h2>No patients in application.</h2>
 </div>
 
 <table class="table table-hover table-responsive" style="margin-left: 15px" th:if="${patients.size() > 0}">
@@ -66,7 +66,7 @@
         <td th:text="${patient.firstName}"></td>
         <td th:text="${patient.lastName}"></td>
         <td th:text="${#temporals.format(patient.dateOfBirth, 'dd-MMM-yyyy')}"></td>
-        <td td sec:authorize="hasRole('ROLE_ADMIN')">
+        <td td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_SUPPORT')">
             <a class="btn btn-primary" th:href="@{/patient/edit/{id}(id = ${patient.id})}">
                 <i class="fas fa-user-edit"></i>
             </a>

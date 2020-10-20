@@ -32,12 +32,19 @@ public class UserService implements UserDetailsService {
 
     @PostConstruct
     public void init() {
+        createUsers();
+    }
+
+    public void createUsers() {
         List<User> users = new ArrayList<>();
         if (!userRepository.findByUsername("admin").isPresent()) {
             users.add(new User("admin", encoder.encode("admin"), "ROLE_ADMIN"));
         }
         if (!userRepository.findByUsername("user").isPresent()) {
             users.add(new User("user", encoder.encode("user"), "ROLE_USER"));
+        }
+        if (!userRepository.findByUsername("support").isPresent()) {
+            users.add(new User("support", encoder.encode("support"), "ROLE_SUPPORT"));
         }
         userRepository.saveAll(users);
     }
