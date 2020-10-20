@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ro.sda.spring.boot.entity.Doctor;
 import ro.sda.spring.boot.service.DoctorService;
+import ro.sda.spring.boot.service.PatientService;
 
 import javax.validation.Valid;
 
@@ -17,15 +18,18 @@ import javax.validation.Valid;
 public class DoctorMVCController {
 
     private final DoctorService doctorService;
+    private final PatientService patientService;
 
     @Autowired
-    public DoctorMVCController(DoctorService doctorService) {
+    public DoctorMVCController(DoctorService doctorService, PatientService patientService) {
         this.doctorService = doctorService;
+        this.patientService = patientService;
     }
 
     @GetMapping
-    public String showDoctors(Model model) {
+    public String showDoctorsAndPatients(Model model) {
         model.addAttribute("doctors", this.doctorService.findAllDoctors());
+        model.addAttribute("patients", this.patientService.findAllPatients());
         return "index";
     }
 

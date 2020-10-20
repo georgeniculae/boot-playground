@@ -22,13 +22,12 @@ public class Patient extends BaseEntity {
     @NotBlank(message = "Last name cannot be blank.")
     private String lastName;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     @NotNull(message = "Date of birth cannot be blank.")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
-    @Column(nullable = false, length = 128)
-    @NotBlank(message = "Height cannot be blank.")
+    @Column(nullable = true, length = 128)
     private String street;
 
     @Column(nullable = true, length = 32)

@@ -1,12 +1,11 @@
 package ro.sda.spring.boot.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 public class User extends BaseEntity {
 
-    @Column(unique = true)
+    //@Column(unique = true)
     private String username;
 
     private String password;

@@ -4,29 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Home page</title>
-    <style>
-        .my-table-header {
-            color: dimgray;
-        }
-    </style>
-
-    <link rel="stylesheet" type="text/css" th:href="@{/css/MyStyles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myStyles.css}"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-
 </head>
 <body>
 <h2>Doctors</h2>
 
 <a href="/logout">Log out</a>
 
-<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/signup}">Add doctor</a>
+<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success" style="margin: 15px" th:href="@{/signup}">Add
+    doctor</a>
 
 <div th:if="${doctors.size() == 0}">
-    <h2>No doctors in application</h2>
+    <h2>No doctors in application.</h2>
 </div>
-
-<table th:if="${doctors.size() > 0}">
+<table class="table table-hover table-responsive" style="margin-left: 15px;" th:if="${doctors.size() > 0}">
     <thead class="my-table-header">
     <th>First name</th>
     <th>Last name</th>
@@ -39,34 +32,50 @@
         <td th:text="${doctor.firstName}"></td>
         <td th:text="${doctor.lastName}"></td>
         <td th:text="${doctor.email}"></td>
-        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/doctor/edit/{id}(id = ${doctor.id})}"
-                                                     th:text="'Edit doctor with id ' + ${doctor.id}"></a>
+        <td sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="btn btn-primary" th:href="@{/doctor/edit/{id}(id = ${doctor.id})}">
+                <i class="fas fa-user-edit"></i>
+            </a>
         </td>
-        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/doctor/delete/{id}(id = ${doctor.id})}"
-                                                     th:text="'Delete doctor with id ' + ${doctor.id}"></a></td>
-        <!-- "@link"/{variabila}{variabile} = ${doctor.id}})} -->
+        <td sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="btn btn-danger" th:href="@{/doctor/delete/{id}(id = ${doctor.id})}">
+                <i class="fas fa-trash-alt"></i>
+            </a>
+        </td>
     </tr>
     </tbody>
-
 </table>
 
 <h2>Patients</h2>
 
-<table>
-    <thead>
+<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success" style="margin: 15px" th:href="@{/signup/patient}">Add
+    patient</a>
+
+<div th:if="${patients.size() == 0}">
+    <h2>No doctors in application.</h2>
+</div>
+
+<table class="table table-hover table-responsive" style="margin-left: 15px" th:if="${patients.size() > 0}">
+    <thead class="my-table-header">
     <th>First name</th>
     <th>Last name</th>
     <th>Date of birth</th>
-    <!--    <th>Weight</th>-->
-    <!--    <th>Street</th>-->
     </thead>
     <tbody>
     <tr th:each="patient : ${patients}">
         <td th:text="${patient.firstName}"></td>
         <td th:text="${patient.lastName}"></td>
-        <td th:text="${patient.dateOfBirth}"></td>
-        <!--        <td th:text="${patient.weight}"></td>-->
-        <!--        <td th:text="${patient.street}"></td>-->
+        <td th:text="${#temporals.format(patient.dateOfBirth, 'dd-MMM-yyyy')}"></td>
+        <td td sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="btn btn-primary" th:href="@{/patient/edit/{id}(id = ${patient.id})}">
+                <i class="fas fa-user-edit"></i>
+            </a>
+        </td>
+        <td td sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="btn btn-danger" th:href="@{/patient/delete/{id}(id = ${patient.id})}">
+                <i class="fas fa-trash-alt"></i>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>
