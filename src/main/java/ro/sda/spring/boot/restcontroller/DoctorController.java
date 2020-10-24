@@ -59,8 +59,8 @@ public class DoctorController {
     }
 
     @PutMapping
-    public ResponseEntity<DoctorDTO> updateDoctor(@RequestBody DoctorDTO doctorDto) {
-        Doctor doctor = doctorTransformer.transform(doctorDto);
+    public ResponseEntity<DoctorDTO> updateDoctor(@RequestBody DoctorDTO doctorDTO) {
+        Doctor doctor = doctorTransformer.transform(doctorDTO);
         Doctor savedDoctor = doctorService.saveDoctor(doctor);
         DoctorDTO savedDoctorDTO = doctorTransformer.transformReversed(savedDoctor);
         return ResponseEntity.ok(savedDoctorDTO);
