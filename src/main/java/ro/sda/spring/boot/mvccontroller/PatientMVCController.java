@@ -24,6 +24,12 @@ public class PatientMVCController {
         this.patientService = patientService;
     }
 
+    @GetMapping(path = "/signup/patient")
+    public String showSignUpPage(Model model) {
+        model.addAttribute("patient", new Patient());
+        return "add-patient";
+    }
+
     @PostMapping(path = "/patient/add")
     public String addPatient(@ModelAttribute("patient") @Valid Patient patient, BindingResult result) {
         if (result.hasErrors()) {
@@ -37,12 +43,6 @@ public class PatientMVCController {
     public String deletePatientById(@PathVariable("id") Long id) {
         this.patientService.deletePatientById(id);
         return "redirect:/";
-    }
-
-    @GetMapping(path = "/signup/patient")
-    public String showSignUpPage(Model model) {
-        model.addAttribute("patient", new Patient());
-        return "add-patient";
     }
 
     @GetMapping(path = "/patient/edit/{id}")
